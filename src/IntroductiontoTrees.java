@@ -20,8 +20,11 @@ public class IntroductiontoTrees {
         System.out.print("Postorder Traversal ---> ");
         PostorderTraversal(root);
         System.out.println();
-        System.out.print("Levelorder Traversal ---> ");
-        LevelorderTraversal(root);
+        System.out.print("Level Order Traversal ---> ");
+        LevelOrderTraversal(root);
+        System.out.println();
+        System.out.print("Iterative Preorder Traversal ---> ");
+        iterativePreorderTraversal(root);
     }
     static void InorderTraversal(BinaryTreeNode<Integer> Root){
         if (Root == null){
@@ -47,7 +50,7 @@ public class IntroductiontoTrees {
         PostorderTraversal(Root.right);
         System.out.print(Root.data + " ");
     }
-    static void LevelorderTraversal(BinaryTreeNode<Integer> Root){
+    static void LevelOrderTraversal(BinaryTreeNode<Integer> Root){
         Queue<BinaryTreeNode<Integer>> traversalQueue = new LinkedList<>();
         traversalQueue.add(Root);
         while (!traversalQueue.isEmpty()){
@@ -61,11 +64,23 @@ public class IntroductiontoTrees {
             }
         }
     }
+
     static void iterativeInorderTraversal(BinaryTreeNode<Integer> Root){
 
     }
     static void iterativePreorderTraversal(BinaryTreeNode<Integer> Root){
-
+        Stack<BinaryTreeNode<Integer>> traversalStack = new Stack<>();
+        traversalStack.push(Root);
+        while (!traversalStack.isEmpty()){
+            BinaryTreeNode<Integer> stackTop = traversalStack.pop();
+            System.out.print(stackTop.data + " ");
+            if (stackTop.right != null){
+                traversalStack.add(stackTop.right);
+            }
+            if (stackTop.left != null){
+                traversalStack.add(stackTop.left);
+            }
+        }
     }
     static void iterativePostorderTraversal(BinaryTreeNode<Integer> Root){
 
