@@ -1,3 +1,4 @@
+import javax.swing.tree.TreeNode;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -25,6 +26,12 @@ public class IntroductiontoTrees {
         System.out.println();
         System.out.print("Iterative Preorder Traversal ---> ");
         iterativePreorderTraversal(root);
+        System.out.println();
+        System.out.print("Iterative Inorder Traversal ---> ");
+        iterativeInorderTraversal(root);
+        System.out.println();
+        System.out.print("Iterative Postorder Traversal ---> ");
+        iterativePostorderTraversal(root);
     }
     static void InorderTraversal(BinaryTreeNode<Integer> Root){
         if (Root == null){
@@ -66,7 +73,22 @@ public class IntroductiontoTrees {
     }
 
     static void iterativeInorderTraversal(BinaryTreeNode<Integer> Root){
-
+        Stack<BinaryTreeNode<Integer>> traversalStack = new Stack<>();
+        BinaryTreeNode<Integer> node = Root;
+        while (true){
+            if (node != null){
+                traversalStack.push(node);
+                node = node.left;
+            }
+            else{
+                if (traversalStack.isEmpty()){
+                    break;
+                }
+                node = traversalStack.pop();
+                System.out.print(node.data + " ");
+                node = node.right;
+            }
+        }
     }
     static void iterativePreorderTraversal(BinaryTreeNode<Integer> Root){
         Stack<BinaryTreeNode<Integer>> traversalStack = new Stack<>();
@@ -83,7 +105,21 @@ public class IntroductiontoTrees {
         }
     }
     static void iterativePostorderTraversal(BinaryTreeNode<Integer> Root){
-
+        Stack<BinaryTreeNode<Integer>> traversalStack1 = new Stack<>();
+        Stack<BinaryTreeNode<Integer>> traversalStack2 = new Stack<>();
+        traversalStack1.push(Root);
+        while (!traversalStack1.isEmpty()){
+            BinaryTreeNode<Integer> node = traversalStack1.pop();
+            traversalStack2.push(node);
+            if (node.left != null){
+                traversalStack1.push(node.left);
+            }
+            if (node.right != null){
+                traversalStack1.push(node.right);
+            }
+        }
+        while (!traversalStack2.isEmpty())
+            System.out.print(traversalStack2.pop().data + " ");
     }
 }
 class BinaryTreeNode<T>{
